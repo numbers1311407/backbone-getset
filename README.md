@@ -29,7 +29,7 @@ models.  Such functions can be used for all sorts of things:
     a.getters.value = function (v) { 
       return "$" + this.attributes.value.toFixed(2)
     }
-    a.get("value") //=> $12.00
+    a.get("value") //=> "$12.00"
 
 
 The `toJSON` is also extended to make use of getters if given the option,
