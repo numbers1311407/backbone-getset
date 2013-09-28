@@ -11,36 +11,36 @@ Write getters and setters to filter the `get` and `set` methods of Backbone
 models.  Such functions can be used for all sorts of things, from providing
 virtual attributes:
 
-   var a = new Backbone.Model({firstName: "bob", lastName: "dobbs"})
-   a.getters.fullName = function () { 
-     return [this.get("firstName"), this.get("lastName")].join(' ')
-   }
-   a.get("fullName") //=> "bob dobbs"
+    var a = new Backbone.Model({firstName: "bob", lastName: "dobbs"})
+    a.getters.fullName = function () { 
+      return [this.get("firstName"), this.get("lastName")].join(' ')
+    }
+    a.get("fullName") //=> "bob dobbs"
 
 ... to mutating data during set:
 
-   a.setters.value = function (v) { return Math.floor(v) }
-   a.set("value", 12.34)
-   a.get("value") //=> 12 (a.attributes.value is now 12)
+    a.setters.value = function (v) { return Math.floor(v) }
+    a.set("value", 12.34)
+    a.get("value") //=> 12 (a.attributes.value is now 12)
   
 ... to decorating data in a get:
 
-   a.getters.value = function (v) { 
-     return "$" + this.attributes.value.toFixed(2)
-   }
-   a.get("value") //=> $12.00
+    a.getters.value = function (v) { 
+      return "$" + this.attributes.value.toFixed(2)
+    }
+    a.get("value") //=> $12.00
 
 
 The `toJSON` is also extended to make use of getters if given the option,
 so given the above `a`:
 
-   a.toJSON({getters: true})
-   // { 
-   //   firstName: "bob",
-   //   lastName: "dobbs",
-   //   fullName: "bob dobbs",
-   //   value: "$12.00" 
-   // }
+    a.toJSON({getters: true})
+    // { 
+    //   firstName: "bob",
+    //   lastName: "dobbs",
+    //   fullName: "bob dobbs",
+    //   value: "$12.00" 
+    // }
 
 
 Getters & setters are stored on the `getters` and `setters` property of the
