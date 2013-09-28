@@ -8,8 +8,9 @@ Usage
 ===
 
 Write getters and setters to filter the `get` and `set` methods of Backbone
-models.  Such functions can be used for all sorts of things, from providing
-virtual attributes:
+models.  Such functions can be used for all sorts of things:
+
+... from providing virtual attributes:
 
     var a = new Backbone.Model({firstName: "bob", lastName: "dobbs"})
     a.getters.fullName = function () { 
