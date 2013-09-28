@@ -1,6 +1,6 @@
 {
   "name": "backbone-getset",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Easily add and extend getters and setters for your Backbone models",
   "main": "lib/backbone-getset.min.js",
   "repository": {
