@@ -1,15 +1,8 @@
 {
-  "name": "backbone-getset",
+  "name": "backbone.getset",
   "version": "0.1.0",
   "description": "Getters & setters for your Backbone models",
   "main": "lib/backbone-getset.min.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/numbers1311407/backbone-getset"
-  },
-  "scripts": {
-    "test": "grunt"
-  },
   "keywords": [
     "backbone",
     "getters",
@@ -18,10 +11,6 @@
     "mutators"
   ],
   "author": "Travis Cox <numbers1311407@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/numbers1311407/backbone-getset/issues"
-  },
   "dependencies": {
     "backbone": "~1.0.0",
     "underscore": "~1.5.2"
