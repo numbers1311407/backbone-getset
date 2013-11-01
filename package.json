@@ -1,6 +1,6 @@
 {
   "name": "backbone-getset",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Getters & setters for your Backbone models",
   "main": "lib/backbone-getset.min.js",
   "homepage": "https://github.com/numbers1311407/backbone-getset",
