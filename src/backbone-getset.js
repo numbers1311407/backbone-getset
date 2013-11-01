@@ -48,7 +48,7 @@ _.extend(Backbone.Model.prototype, {
     // then apply appropriate setters and call the original function
     _.each(this.setters, function (fn, attr) {
       if (_.has(attrs, attr)) attrs[attr] = fn.call(this, attrs[attr])
-    }.bind(this))
+    }, this)
 
     return Model_set.call(this, attrs, options)
   },
@@ -80,7 +80,7 @@ _.extend(Backbone.Model.prototype, {
     if (options.getters) {
       _.each(this.getters, function (fn, attr) {
         attrs[attr] = fn.call(this)
-      }.bind(this))
+      }, this)
     }
 
     return attrs
