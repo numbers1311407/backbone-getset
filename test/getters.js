@@ -71,7 +71,7 @@ suite("getters", function () {
         },
         getters: {
           bar: function () {
-            return this.attributes.bar.split('').reverse().join('');
+            return this.attributes.bar.split('').reverse().join('')
           },
           baz: function () {
             return "baz"
@@ -81,17 +81,17 @@ suite("getters", function () {
     })
 
     test("is normal attributes, without getters option", function () {
-      var json = (new this.A).toJSON();
-      Object.keys(json).length.should.eql(2);
-      json.foo.should.eql("foo");
-      json.bar.should.eql("bar");
+      var json = (new this.A).toJSON()
+      Object.keys(json).length.should.eql(2)
+      json.foo.should.eql("foo")
+      json.bar.should.eql("bar")
     })
 
     test("is getter-extended attributes, with getters option", function () {
-      var json = (new this.A).toJSON({getters: true});
-      Object.keys(json).length.should.eql(3);
-      json.foo.should.eql("foo");
-      json.bar.should.eql("rab");
+      var json = (new this.A).toJSON({getters: true})
+      Object.keys(json).length.should.eql(3)
+      json.foo.should.eql("foo")
+      json.bar.should.eql("rab")
     })
   })
-});
+})

@@ -1,12 +1,15 @@
 module.exports = function (grunt) {
 
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
     meta: {
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' + 
-        '<%= pkg.homepage ? " * " + pkg.homepage + "\n *\n" : "" %>' +
-        ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-        ' */'
+      banner: 
+        '/*!\n * <%= pkg.title || pkg.name %> - <%= pkg.version %>\n' +
+        ' * <%= pkg.homepage %>\n' +
+        ' * Copyright(c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+        ' * <%= pkg.license %> License\n' +
+        ' */\n'
     },
 
     preprocess: {
@@ -16,9 +19,22 @@ module.exports = function (grunt) {
       }
     },
 
+    concat: {
+      options: {
+        banner: '<%= meta.banner %>'
+      },
+      build: {
+        src: ['lib/backbone-getset.js'],
+        dest: 'lib/backbone-getset.js'
+      }
+    },
+
     uglify: {
       dist: {
-        src: ["<banner>", "lib/backbone-getset.js"],
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        src: "lib/backbone-getset.js",
         dest: "lib/backbone-getset.min.js"
       }
     },
@@ -36,10 +52,11 @@ module.exports = function (grunt) {
   })
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-simple-mocha');
 
-  grunt.registerTask("build", "preprocess");
+  grunt.registerTask("build", ["preprocess", "concat"]);
   grunt.registerTask("dist", ["build", "uglify"]);
   grunt.registerTask("default", ["build", "simplemocha"])
 }

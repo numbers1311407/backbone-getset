@@ -4,17 +4,17 @@
  * if they are defined on the proto (which, after the first time they
  * are defined, they will be for future extensions)
  */
-var Model_extend = Backbone.Model.extend;
+var Model_extend = Backbone.Model.extend
 
 Backbone.Model.extend = function () {
-  var child = Model_extend.apply(this, arguments);
-  extendProto('getters', this, child);
-  extendProto('setters', this, child);
-  return child;
+  var child = Model_extend.apply(this, arguments)
+  extendProto('getters', this, child)
+  extendProto('setters', this, child)
+  return child
 }
 
 
-var Model_set = Backbone.Model.prototype.set;
+var Model_set = Backbone.Model.prototype.set
 
 
 _.extend(Backbone.Model.prototype, {
@@ -36,21 +36,21 @@ _.extend(Backbone.Model.prototype, {
     // Copy the attrs construction from the standard `set`.  A cleaner
     // but even more brittle alternative would be to hook into `_validate`
     // which is always given the constructed attributes object.
-    var attrs;
-    if (key == null) return this;
+    var attrs
+    if (key == null) return this
     if (typeof key === 'object') {
-      attrs = key;
-      options = val;
+      attrs = key
+      options = val
     } else {
-      (attrs = {})[key] = val;
+      ;(attrs = {})[key] = val
     }
 
     // then apply appropriate setters and call the original function
     _.each(this.setters, function (fn, attr) {
-      if (_.has(attrs, attr)) attrs[attr] = fn.call(this, attrs[attr]);
-    }.bind(this));
+      if (_.has(attrs, attr)) attrs[attr] = fn.call(this, attrs[attr])
+    }.bind(this))
 
-    return Model_set.call(this, attrs, options);
+    return Model_set.call(this, attrs, options)
   },
 
 
@@ -59,9 +59,9 @@ _.extend(Backbone.Model.prototype, {
    */
   get: function (attr) {
     if (this.getters && this.getters[attr]) {
-      return this.getters[attr].call(this);
+      return this.getters[attr].call(this)
     }
-    return this.attributes[attr];
+    return this.attributes[attr]
   },
 
 
@@ -73,19 +73,19 @@ _.extend(Backbone.Model.prototype, {
    *   getters: whether to include getters in object (default false)
    */
   toJSON: function(options) {
-    options || (options = {});
+    options || (options = {})
 
-    var attrs = _.clone(this.attributes);
+    var attrs = _.clone(this.attributes)
 
     if (options.getters) {
       _.each(this.getters, function (fn, attr) {
-        attrs[attr] = fn.call(this);
-      }.bind(this));
+        attrs[attr] = fn.call(this)
+      }.bind(this))
     }
 
-    return attrs;
+    return attrs
   }
-});
+})
 
 
 /**
@@ -96,6 +96,6 @@ _.extend(Backbone.Model.prototype, {
 function extendProto(prop, parent, child) {
   if (parent.prototype[prop]) {
     child.prototype[prop] = _.extend(
-        {}, parent.prototype[prop], child.prototype[prop]);
+        {}, parent.prototype[prop], child.prototype[prop])
   }
 }
